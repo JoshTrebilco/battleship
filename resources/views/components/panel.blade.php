@@ -29,15 +29,15 @@
 @endphp
 
 <div class="space-y-6 w-full">
-    @if (session('status'))
+    {{-- @if (session('status'))
         <div class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 px-4 py-3 rounded-2xl">
-            @if (is_array(session('status')) && isset(session('status')['hit']))
+            @if (isset(session('status')['hit']))
                 {{ session('status')['hit'] ? 'Hit!' : 'Miss!' }}
             @else
                 {{ session('status') }}
             @endif
         </div>
-    @endif
+    @endif --}}
 
     @if ($errors->any())
         <div class="bg-rose-500/10 border border-rose-500/40 text-rose-200 px-4 py-3 rounded-2xl space-y-2">
