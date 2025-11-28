@@ -6,15 +6,20 @@
 <x-layout>
     <div class="w-full min-h-screen px-4 sm:px-6 lg:px-10 py-4 sm:py-6 md:py-10">
         <div class="max-w-7xl mx-auto space-y-4 sm:space-y-6 md:space-y-10">
-            <div class="flex items-center gap-3 text-slate-300">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-slate-300">
                 <a href="{{ route('games.index') }}" class="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 transition">
                     <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
-                    Back to briefing room
+                    <span class="hidden sm:inline">Back to briefing room</span>
+                    <span class="sm:hidden">Back</span>
                 </a>
                 <span class="text-xs uppercase tracking-[0.3em] text-slate-600">/</span>
-                <span class="text-sky-200 font-semibold">Operation {{ $game->id }}</span>
+                <span class="text-sky-200 font-semibold text-sm sm:text-base">Operation {{ $game->id }}</span>
+                <span class="text-xs uppercase tracking-[0.3em] text-slate-600">/</span>
+                <span class="text-sky-200 font-semibold text-sm sm:text-base">Status: {{ $game->ended ? 'Battle Over' : ($game->started ? 'In Progress' : 'Deploying') }}</span>
+                <span class="text-xs uppercase tracking-[0.3em] text-slate-600">/</span>
+                <span class="text-sky-200 font-semibold text-sm sm:text-base">Active Commander: {{ $game->activePlayer()?->name ?? 'Pending' }}</span>
             </div>
 
             <div class="grid gap-4 sm:gap-6 md:gap-8 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
