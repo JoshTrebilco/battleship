@@ -31,7 +31,11 @@
 <div class="space-y-6 w-full">
     @if (session('status'))
         <div class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 px-4 py-3 rounded-2xl">
-            {{ session('status')['hit'] ? 'Hit!' : 'Miss!' }}
+            @if (is_array(session('status')) && isset(session('status')['hit']))
+                {{ session('status')['hit'] ? 'Hit!' : 'Miss!' }}
+            @else
+                {{ session('status') }}
+            @endif
         </div>
     @endif
 
