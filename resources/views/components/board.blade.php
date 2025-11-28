@@ -79,9 +79,9 @@
     };
 @endphp
 
-<div class="space-x-6 space-y-6 md:space-y-0 w-full flex flex-col md:flex-row">
-    <div class="w-full md:w-1/2 bg-slate-900/80 border border-slate-700 rounded-3xl p-6 shadow-2xl shadow-black/40">
-        <div class="h-24 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+<div class="space-x-6 space-y-3 sm:space-y-4 md:space-y-0 w-full flex flex-col md:flex-row">
+    <div class="w-full md:w-1/2 bg-slate-900/80 border border-slate-700 rounded-3xl p-3 sm:p-4 md:p-6 shadow-2xl shadow-black/40">
+        <div class="h-auto sm:h-20 md:h-24 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-sky-200 tracking-wide">Your Fleet</h2>
                 <p class="text-sm text-slate-400">Position your ships and monitor enemy fire.</p>
@@ -99,11 +99,14 @@
                         Deploying
                     </span>
                 @endif
+                <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
+                    {{ $game->ended ? 'Battle Over' : ($game->started ? 'In Progress' : 'Deploying') }}
+                </span>
             </div>
         </div>
 
         <div class="overflow-x-auto">
-            <div class="inline-grid grid-cols-[repeat(11,minmax(24px,1fr))] gap-1 text-center text-xs font-semibold text-slate-400">
+            <div class="inline-grid grid-cols-[repeat(11,minmax(32px,1fr))] gap-1 text-center text-xs font-semibold text-slate-400">
                 <div></div>
                 @foreach($colLabels as $label)
                     <div class="py-1">{{ $label }}</div>
@@ -143,8 +146,8 @@
         </div>
     </div>
 
-    <div class="w-full md:w-1/2 bg-slate-900/80 border border-slate-700 rounded-3xl p-6 shadow-2xl shadow-black/40">
-        <div class="h-24 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div class="w-full md:w-1/2 bg-slate-900/80 border border-slate-700 rounded-3xl p-3 sm:p-4 md:p-6 shadow-2xl shadow-black/40">
+        <div class="h-auto sm:h-20 md:h-24 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-sky-200 tracking-wide">Enemy Waters</h2>
                 <p class="text-sm text-slate-400">Track your fired shots and known intel.</p>
@@ -153,6 +156,15 @@
                 <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
                     Shots fired: {{ count($yourShots) }}
                 </span>
+                @if($isTurn && !$game->ended)
+                    <span class="inline-flex items-center rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 border border-emerald-500/40 animate-pulse">
+                        Your Turn
+                    </span>
+                @elseif(!$isTurn && !$game->ended && $game->activePlayer())
+                    <span class="inline-flex items-center rounded-full bg-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-300 border border-amber-500/40">
+                        {{ $game->activePlayer()->name }}'s Turn
+                    </span>
+                @endif
                 @if($game->ended && $game->winner_id && (int) $game->winner_id === $auth_player_id)
                     <span class="inline-flex items-center rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200 border border-sky-500/40">
                         Victory
@@ -162,7 +174,7 @@
         </div>
 
         <div class="overflow-x-auto">
-            <div class="inline-grid grid-cols-[repeat(11,minmax(24px,1fr))] gap-1 text-center text-xs font-semibold text-slate-400">
+            <div class="inline-grid grid-cols-[repeat(11,minmax(32px,1fr))] gap-1 text-center text-xs font-semibold text-slate-400">
                 <div></div>
                 @foreach($colLabels as $label)
                     <div class="py-1">{{ $label }}</div>

@@ -4,8 +4,8 @@
 @endphp
 
 <x-layout>
-    <div class="w-full min-h-screen px-4 sm:px-6 lg:px-10 py-10">
-        <div class="max-w-7xl mx-auto space-y-10">
+    <div class="w-full min-h-screen px-4 sm:px-6 lg:px-10 py-4 sm:py-6 md:py-10">
+        <div class="max-w-7xl mx-auto space-y-4 sm:space-y-6 md:space-y-10">
             <div class="flex items-center gap-3 text-slate-300">
                 <a href="{{ route('games.index') }}" class="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 transition">
                     <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -17,35 +17,7 @@
                 <span class="text-sky-200 font-semibold">Operation {{ $game->id }}</span>
             </div>
 
-            <div class="bg-slate-900/70 border border-slate-700 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/40">
-                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                    <div>
-                        <p class="text-xs uppercase tracking-[0.5em] text-slate-500">Battleship Command</p>
-                        <h1 class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-sky-300 via-cyan-400 to-blue-600">
-                            Engage the Fleet
-                        </h1>
-                        <p class="text-slate-300 mt-3">
-                            Coordinate with your ally, deploy the full fleet, and sink the opposing navy.
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap gap-4 text-sm text-slate-300">
-                        <div class="bg-slate-800/70 border border-slate-700 rounded-2xl px-4 py-3 min-w-[150px]">
-                            <p class="text-xs uppercase tracking-[0.4em] text-slate-500">Status</p>
-                            <p class="text-lg font-semibold text-sky-200">
-                                {{ $game->ended ? 'Battle Over' : ($game->started ? 'In Progress' : 'Deploying') }}
-                            </p>
-                        </div>
-                        <div class="bg-slate-800/70 border border-slate-700 rounded-2xl px-4 py-3 min-w-[150px]">
-                            <p class="text-xs uppercase tracking-[0.4em] text-slate-500">Active Commander</p>
-                            <p class="text-lg font-semibold text-amber-200">
-                                {{ $game->activePlayer()?->name ?? 'Pending' }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid gap-8 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+            <div class="grid gap-4 sm:gap-6 md:gap-8 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
                 <div>
                     <x-board :game="$game" :auth_player_id="$auth_player_id" :channel="$channel" />
                 </div>

@@ -180,8 +180,13 @@
             <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-slate-500 to-slate-700 flex items-center justify-center text-white">
                 🧭
             </div>
-            <div>
-                <h3 class="text-lg font-semibold text-sky-100">Fleet Status</h3>
+            <div class="flex-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <h3 class="text-lg font-semibold text-sky-100">Fleet Status</h3>
+                    <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
+                        {{ $game->ended ? 'Battle Over' : ($game->started ? 'In Progress' : 'Deploying') }}
+                    </span>
+                </div>
                 <p class="text-sm text-slate-400">Monitor commanders, readiness, and victory conditions.</p>
             </div>
         </div>
