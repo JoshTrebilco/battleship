@@ -88,7 +88,7 @@
         }
 
         handleEvent(event, gameState) {
-            if (event === 'App\\\\Events\\\\Gameplay\\\\GameEnded') {
+            if (event === 'App\\Events\\Gameplay\\GameEnded') {
                 this.showWinner(gameState?.winner_id);
                 return;
             }

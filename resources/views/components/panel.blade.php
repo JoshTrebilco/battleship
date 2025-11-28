@@ -31,7 +31,7 @@
 <div class="space-y-6 w-full">
     @if (session('status'))
         <div class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 px-4 py-3 rounded-2xl">
-            {{ session('status') }}
+            {{ session('status')['hit'] ? 'Hit!' : 'Miss!' }}
         </div>
     @endif
 

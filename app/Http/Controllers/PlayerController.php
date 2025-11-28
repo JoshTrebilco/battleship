@@ -98,7 +98,7 @@ class PlayerController extends Controller
         }
 
         try {
-            verb(new PlayerTakesShot(
+            $shot = verb(new PlayerTakesShot(
                 game_id: $game_id,
                 player_id: $player_id,
                 target_player_id: $validated['target_player_id'],
@@ -110,7 +110,7 @@ class PlayerController extends Controller
             return back()->withErrors($exception->getMessage())->withInput();
         }
 
-        return back()->with('status', 'Shot fired.');
+        return back()->with('status', $shot->getShotResult($targetBoard));
     }
 
     protected function authorizePlayer(int $player_id): void
