@@ -88,8 +88,8 @@
                 <h2 class="text-2xl font-bold text-sky-200 tracking-wide">Your Fleet</h2>
                 <p class="text-sm text-slate-400">Position your ships and monitor enemy fire.</p>
             </div>
-            <div class="flex flex-wrap gap-2">
-                <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
+            <div class="flex self-start flex-nowrap gap-2">
+                <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700 whitespace-nowrap">
                     {{ $game->ended ? 'Battle Over' : ($game->started ? 'In Progress' : 'Ships placed: ' . count($playerBoard->ships ?? []) . '/' . \App\Enums\ShipType::totalShips()) }}
                 </span>
             </div>
@@ -140,23 +140,23 @@
         <div class="h-auto sm:h-20 md:h-24 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-sky-200 tracking-wide">Enemy Waters</h2>
-                <p class="text-sm text-slate-400">Track your fired shots and known intel.</p>
+                <p class="text-sm text-slate-400">Click on an enemy position to fire a shot.</p>
             </div>
-            <div class="flex flex-wrap gap-2">
-                <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
+            <div class="flex flex-1 self-start flex-nowrap gap-2">
+                <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700 whitespace-nowrap">
                     Shots fired: {{ count($yourShots) }}
                 </span>
                 @if($isTurn && !$game->ended)
-                    <span class="inline-flex items-center rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 border border-emerald-500/40 animate-pulse">
+                    <span class="inline-flex items-center rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 border border-emerald-500/40 animate-pulse whitespace-nowrap">
                         Your Turn
                     </span>
                 @elseif(!$isTurn && !$game->ended && $game->activePlayer())
-                    <span class="inline-flex items-center rounded-full bg-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-300 border border-amber-500/40">
+                    <span class="inline-flex items-center rounded-full bg-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-300 border border-amber-500/40 whitespace-nowrap">
                         {{ $game->activePlayer()->name }}'s Turn
                     </span>
                 @endif
                 @if($game->ended && $game->winner_id && (int) $game->winner_id === $auth_player_id)
-                    <span class="inline-flex items-center rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200 border border-sky-500/40">
+                    <span class="inline-flex items-center rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200 border border-sky-500/40 whitespace-nowrap">
                         Victory
                     </span>
                 @endif
