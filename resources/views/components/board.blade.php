@@ -32,6 +32,8 @@
         });
     }
     $opponentBoard = $opponent?->board();
+    $targetPlayerId = $opponent?->id;
+    $isTurn = $game->active_player_id && (string) $game->active_player_id === (string) $auth_player_id;
 
     $playerShots = $playerBoard?->getShots() ?? [];
     $opponentShots = $opponentBoard?->getShots() ?? [];
@@ -171,16 +173,35 @@
                     @foreach($cols as $colIndex => $col)
                         @php
                             $status = $statusForOpponentBoard($yourShots, $row, $col);
+                            $isClickable = $status === 'unknown' && $isTurn && $targetPlayerId;
                         @endphp
-                        <div
-                            class="aspect-square rounded-lg flex items-center justify-center text-[10px] {{ $cellClasses[$status] ?? $cellClasses['unknown'] }}"
-                        >
-                            @if($status === 'hit')
-                                ✱
-                            @elseif($status === 'miss')
-                                ·
-                            @endif
-                        </div>
+                        @if($isClickable)
+                            <form
+                                action="{{ route('players.takeShot', ['game_id' => $game->id, 'player_id' => $auth_player_id]) }}"
+                                method="post"
+                                class="w-full h-full"
+                            >
+                                @csrf
+                                <input type="hidden" name="target_player_id" value="{{ $targetPlayerId }}">
+                                <input type="hidden" name="row" value="{{ $row }}">
+                                <input type="hidden" name="col" value="{{ $col }}">
+                                <button
+                                    type="submit"
+                                    class="w-full h-full aspect-square rounded-lg flex items-center justify-center text-[10px] {{ $cellClasses[$status] ?? $cellClasses['unknown'] }} cursor-pointer hover:opacity-80 hover:scale-105 transition-all p-0 border-0"
+                                >
+                                </button>
+                            </form>
+                        @else
+                            <div
+                                class="aspect-square rounded-lg flex items-center justify-center text-[10px] {{ $cellClasses[$status] ?? $cellClasses['unknown'] }}"
+                            >
+                                @if($status === 'hit')
+                                    ✱
+                                @elseif($status === 'miss')
+                                    ·
+                                @endif
+                            </div>
+                        @endif
                     @endforeach
                 @endforeach
             </div>

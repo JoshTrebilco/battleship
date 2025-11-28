@@ -165,53 +165,6 @@
         </div>
     @endif
 
-    @if ($hasJoined && $game->started && ! $game->ended)
-        <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-4 shadow-xl shadow-black/40">
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-rose-600 to-amber-600 flex items-center justify-center text-white">
-                    🎯
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-sky-100">Fire Salvo</h3>
-                    <p class="text-sm text-slate-400">
-                        {{ $isTurn ? 'Enter coordinates to fire on the opposing fleet.' : 'Awaiting your turn.' }}
-                    </p>
-                </div>
-            </div>
-
-            @if (! $targetPlayerId)
-                <div class="bg-slate-800/60 border border-slate-700 rounded-2xl px-4 py-3 text-sm text-slate-300">
-                    Enemy commander not detected yet.
-                </div>
-            @else
-                <form
-                    action="{{ route('players.takeShot', ['game_id' => $game->id, 'player_id' => $auth_player_id]) }}"
-                    method="post"
-                    class="space-y-4"
-                >
-                    @csrf
-                    <input type="hidden" name="target_player_id" value="{{ $targetPlayerId }}">
-                    <div class="grid grid-cols-2 gap-4">
-                        <label class="flex flex-col text-sm text-slate-300 space-y-1">
-                            Row (0-9)
-                            <input type="number" name="row" min="0" max="9" class="rounded-2xl bg-slate-800 border border-slate-700 px-4 py-2 text-slate-100 focus:outline-none" required {{ $isTurn ? '' : 'disabled' }}>
-                        </label>
-                        <label class="flex flex-col text-sm text-slate-300 space-y-1">
-                            Column (0-9)
-                            <input type="number" name="col" min="0" max="9" class="rounded-2xl bg-slate-800 border border-slate-700 px-4 py-2 text-slate-100 focus:outline-none" required {{ $isTurn ? '' : 'disabled' }}>
-                        </label>
-                    </div>
-                    <button
-                        type="submit"
-                        class="w-full bg-linear-to-r from-rose-600 to-amber-500 text-white font-semibold rounded-2xl px-4 py-3 shadow hover:translate-y-[-2px] transition disabled:opacity-40 disabled:cursor-not-allowed"
-                        {{ $isTurn ? '' : 'disabled' }}
-                    >
-                        {{ $isTurn ? 'Fire Torpedoes' : 'Waiting for Commander' }}
-                    </button>
-                </form>
-            @endif
-        </div>
-    @endif
 
     @if (! $hasJoined && $game->isInProgress())
         <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-2 shadow-xl shadow-black/40">
