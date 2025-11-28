@@ -79,6 +79,7 @@
     };
 @endphp
 
+@if($game->hasAllPlayersJoined())
 <div class="space-x-6 space-y-3 sm:space-y-4 md:space-y-0 w-full flex flex-col md:flex-row">
     <div class="w-full md:w-1/2 bg-slate-900/80 border border-slate-700 rounded-3xl p-3 sm:p-4 md:p-6 shadow-2xl shadow-black/40">
         <div class="h-auto sm:h-20 md:h-24 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
@@ -88,19 +89,7 @@
             </div>
             <div class="flex flex-wrap gap-2">
                 <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
-                    Ships placed: {{ count($playerBoard->ships ?? []) }}/{{ \App\Enums\ShipType::totalShips() }}
-                </span>
-                @if($playerBoard?->isSetupComplete())
-                    <span class="inline-flex items-center rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 border border-emerald-500/40">
-                        Setup Complete
-                    </span>
-                @else
-                    <span class="inline-flex items-center rounded-full bg-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-300 border border-amber-500/40">
-                        Deploying
-                    </span>
-                @endif
-                <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
-                    {{ $game->ended ? 'Battle Over' : ($game->started ? 'In Progress' : 'Deploying') }}
+                    {{ $game->ended ? 'Battle Over' : ($game->started ? 'In Progress' : 'Ships placed: ' . count($playerBoard->ships ?? []) . '/' . \App\Enums\ShipType::totalShips()) }}
                 </span>
             </div>
         </div>
@@ -235,6 +224,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
