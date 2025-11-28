@@ -23,9 +23,6 @@ function placeShip($game_state, int $player_id, ShipType $ship_type, int $row, i
     $player = PlayerState::load($player_id);
     $board = $player->board();
 
-    dump($board);
-    dump($player);
-
     return verb(new PlayerPlacedShip(
         game_id: $game_state->id,
         player_id: $player_id,
@@ -185,19 +182,12 @@ test('board setup is complete when all ships placed', function () {
 
     $game_state = verb(new GameCreated)->state(GameState::class);
 
-    dump($game_state);
-    dump($player_id);
     verb(new PlayerJoinedGame(game_id: $game_state->id, player_id: $player_id));
 
-    dump($game_state->player_ids);
-    dump($player_id);
     $player = PlayerState::load($player_id);
     $board = $player->board();
 
-    dump($board);
-
     expect($board->isSetupComplete())->toBeFalse();
-    dump($board->isSetupComplete());
 
     // Place all 5 ships
     placeShip($game_state, $player_id, ShipType::CARRIER, 0, 0, 'horizontal');
