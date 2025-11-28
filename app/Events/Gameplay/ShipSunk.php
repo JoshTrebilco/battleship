@@ -16,6 +16,7 @@ class ShipSunk extends Event
         public int $game_id,
         public int $player_id,        // shooter
         public int $target_player_id,  // ship owner
+        public int $board_id,
         public string $ship_type,
     ) {}
 

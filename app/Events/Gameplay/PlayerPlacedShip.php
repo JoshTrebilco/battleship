@@ -58,6 +58,11 @@ class PlayerPlacedShip extends Event
             $game->hasPlayer($this->player_id),
             'Player must be in the game to place ships.'
         );
+
+        $this->assert(
+            ! $game->started,
+            'Cannot place ships once the game has started.'
+        );
     }
 
     public function applyToBoard(BoardState $board)

@@ -304,6 +304,9 @@ test('can take shot and hit ship', function () {
     // Place a ship
     placeShip($game_state, $target_id, ShipType::DESTROYER, 0, 0, 'horizontal');
 
+    $game_state->started = true;
+    $game_state->active_player_id = $shooter_id;
+
     // Take shot
     takeShot($game_state, $shooter_id, $target_id, 0, 0);
 
@@ -320,6 +323,9 @@ test('can take shot and miss', function () {
     $game_state = verb(new GameCreated)->state(GameState::class);
     verb(new PlayerJoinedGame(game_id: $game_state->id, player_id: $shooter_id));
     verb(new PlayerJoinedGame(game_id: $game_state->id, player_id: $target_id));
+
+    $game_state->started = true;
+    $game_state->active_player_id = $shooter_id;
 
     $target_player = PlayerState::load($target_id);
     $target_board = $target_player->board();
@@ -340,6 +346,9 @@ test('cannot shoot same position twice', function () {
     $game_state = verb(new GameCreated)->state(GameState::class);
     verb(new PlayerJoinedGame(game_id: $game_state->id, player_id: $shooter_id));
     verb(new PlayerJoinedGame(game_id: $game_state->id, player_id: $target_id));
+
+    $game_state->started = true;
+    $game_state->active_player_id = $shooter_id;
 
     // Take first shot
     takeShot($game_state, $shooter_id, $target_id, 0, 0);
@@ -391,6 +400,9 @@ test('ship sinks when fully hit', function () {
     // Place a destroyer (2 spaces)
     placeShip($game_state, $target_id, ShipType::DESTROYER, 0, 0, 'horizontal');
 
+    $game_state->started = true;
+    $game_state->active_player_id = $shooter_id;
+
     // Hit first position
     takeShot($game_state, $shooter_id, $target_id, 0, 0);
     expect($target_board->isShipSunk('destroyer'))->toBeFalse();
@@ -424,12 +436,17 @@ test('all ships sunk triggers game end', function () {
     placeShip($game_state, $target_id, ShipType::SUBMARINE, 3, 0, 'horizontal');
     placeShip($game_state, $target_id, ShipType::DESTROYER, 4, 0, 'horizontal');
 
+    $game_state->started = true;
+    $game_state->active_player_id = $shooter_id;
+
     // Sink all ships
+    $row = 0;
     foreach (ShipType::all() as $shipType) {
         $length = $shipType->length();
         for ($i = 0; $i < $length; $i++) {
-            takeShot($game_state, $shooter_id, $target_id, 0, $i);
+            takeShot($game_state, $shooter_id, $target_id, $row, $i);
         }
+        $row++;
     }
 
     expect($target_board->isAllShipsSunk())->toBeTrue()

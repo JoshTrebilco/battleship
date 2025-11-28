@@ -14,6 +14,12 @@ use Thunk\Verbs\Event;
 #[AppliesToState(GameState::class)]
 class PlayerTakesShot extends Event
 {
+    /**
+     * Verbs' AppliesToState discovery expects a board_id property. We still
+     * accept the more descriptive target_board_id for readability in call-sites.
+     */
+    public int $board_id;
+
     public function __construct(
         public int $game_id,
         public int $player_id,
@@ -21,10 +27,17 @@ class PlayerTakesShot extends Event
         public int $target_board_id,
         public int $row,
         public int $col,
-    ) {}
+    ) {
+        $this->board_id = $this->target_board_id;
+    }
 
     public function validateBoard(BoardState $board)
     {
+        $this->assert(
+            $board->player_id === $this->target_player_id,
+            'Board does not belong to the target player.'
+        );
+
         // Check if shot is within bounds
         $this->assert(
             $this->row >= 0 && $this->row < BoardState::BOARD_SIZE &&
@@ -69,6 +82,11 @@ class PlayerTakesShot extends Event
             $game->isInProgress(),
             'Game must be in progress to take shots.'
         );
+
+        $this->assert(
+            $game->active_player_id === $this->player_id,
+            'It is not this player\'s turn.'
+        );
     }
 
     public function applyToBoard(BoardState $board)
@@ -108,18 +126,22 @@ class PlayerTakesShot extends Event
     {
         $shipType = $board->getShipAt($this->row, $this->col);
 
-        // If it was a hit, check if the ship is now sunk
-        if ($shipType && $board->isShipSunk($shipType)) {
+        if (! $shipType) {
+            // Misses immediately end the turn.
+            TurnEnded::fire(
+                game_id: $this->game_id
+            );
+
+            return;
+        }
+
+        if ($board->isShipSunk($shipType)) {
             ShipSunk::fire(
                 game_id: $this->game_id,
                 player_id: $this->player_id,
                 target_player_id: $this->target_player_id,
+                board_id: $board->id,
                 ship_type: $shipType
-            );
-        } else {
-            // If it was a miss, end the turn
-            TurnEnded::fire(
-                game_id: $this->game_id
             );
         }
     }
