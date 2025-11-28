@@ -22,7 +22,7 @@
     $placedShips = array_keys($playerBoard->ships ?? []);
     $remainingShips = collect(ShipType::all())->reject(fn (ShipType $ship) => in_array($ship->value, $placedShips));
     $players = $game->players();
-    $opponents = $players->reject(fn ($p) => $p->id === $auth_player_id);
+    $opponents = $players->reject(fn ($p) => $p->id == $auth_player_id);
     $targetPlayerId = $opponents->first()?->id;
     $isTurn = $game->active_player_id && (string) $game->active_player_id === (string) $auth_player_id;
     $gameLink = url('/games/' . $game->id);
