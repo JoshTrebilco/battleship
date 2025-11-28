@@ -65,9 +65,9 @@
     };
 @endphp
 
-<div class="space-y-6 w-full">
-    <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 shadow-2xl shadow-black/40">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+<div class="space-x-6 space-y-6 md:space-y-0 w-full flex flex-col md:flex-row">
+    <div class="w-full md:w-1/2 bg-slate-900/80 border border-slate-700 rounded-3xl p-6 shadow-2xl shadow-black/40">
+        <div class="h-24 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-sky-200 tracking-wide">Your Fleet</h2>
                 <p class="text-sm text-slate-400">Position your ships and monitor enemy fire.</p>
@@ -120,10 +120,17 @@
                 @endforeach
             </div>
         </div>
+
+        <div class="mt-6 flex flex-wrap gap-4 text-xs text-slate-300">
+            <div class="flex items-center gap-2">
+                <span class="w-4 h-4 rounded bg-sky-500/60 border border-sky-300"></span>
+                Ship segment
+            </div>
+        </div>
     </div>
 
-    <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 shadow-2xl shadow-black/40">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+    <div class="w-full md:w-1/2 bg-slate-900/80 border border-slate-700 rounded-3xl p-6 shadow-2xl shadow-black/40">
+        <div class="h-24 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
                 <h2 class="text-2xl font-bold text-sky-200 tracking-wide">Enemy Waters</h2>
                 <p class="text-sm text-slate-400">Track your fired shots and known intel.</p>
@@ -168,10 +175,6 @@
         </div>
 
         <div class="mt-6 flex flex-wrap gap-4 text-xs text-slate-300">
-            <div class="flex items-center gap-2">
-                <span class="w-4 h-4 rounded bg-sky-500/60 border border-sky-300"></span>
-                Ship segment
-            </div>
             <div class="flex items-center gap-2">
                 <span class="w-4 h-4 rounded bg-rose-500/80 border border-rose-300"></span>
                 Confirmed hit

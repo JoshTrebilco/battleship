@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
+            <div class="grid gap-8 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]">
                 <div>
                     <x-board :game="$game" :auth_player_id="$auth_player_id" :channel="$channel" />
                 </div>

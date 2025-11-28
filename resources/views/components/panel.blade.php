@@ -76,6 +76,7 @@
         </div>
     @endif
 
+    @if ($hasJoined && ! $game->hasAllPlayersJoined())
     <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-4 shadow-xl shadow-black/40">
         <div class="flex items-center gap-3">
             <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-slate-600 to-slate-800 flex items-center justify-center text-white">
@@ -100,9 +101,10 @@
                 class="px-4 py-3 rounded-2xl bg-linear-to-r from-sky-500 to-sky-700 text-white font-semibold shadow hover:translate-y-[-2px] transition"
             >
                 Copy Link
-            </button>
+                </button>
+            </div>
         </div>
-    </div>
+    @endif
 
     @if ($hasJoined && ! $game->started && ! $game->ended)
         <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-4 shadow-xl shadow-black/40">
