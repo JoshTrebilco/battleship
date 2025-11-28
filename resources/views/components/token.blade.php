@@ -20,7 +20,7 @@
     class="relative inline-flex items-center justify-center rounded-full text-white font-semibold shadow-lg shadow-black/10"
     style="width: {{ $size }}px; height: {{ $size }}px;"
 >
-    <div class="w-full h-full rounded-full bg-gradient-to-br {{ $gradient }} border border-white/10 flex items-center justify-center text-xs uppercase tracking-wide">
+    <div class="w-full h-full rounded-full bg-linear-to-br {{ $gradient }} border border-white/10 flex items-center justify-center text-xs uppercase tracking-wide">
         {{ $label }}
     </div>
 </div>

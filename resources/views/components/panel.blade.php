@@ -49,7 +49,7 @@
     @if (! $hasJoined && ! $game->ended)
         <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-4 shadow-xl shadow-black/40">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-700 flex items-center justify-center text-white">
+                <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-sky-500 to-blue-700 flex items-center justify-center text-white">
                     ⚓
                 </div>
                 <div>
@@ -62,7 +62,7 @@
                     @csrf
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-sky-600 to-blue-700 text-white font-semibold rounded-2xl px-4 py-3 shadow-lg shadow-sky-900/40 hover:translate-y-[-2px] transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        class="w-full bg-linear-to-r from-sky-600 to-blue-700 text-white font-semibold rounded-2xl px-4 py-3 shadow-lg shadow-sky-900/40 hover:translate-y-[-2px] transition disabled:opacity-50 disabled:cursor-not-allowed"
                         @if($game->hasAllPlayersJoined()) disabled @endif
                     >
                         {{ $game->hasAllPlayersJoined() ? 'Fleet already full' : 'Join Fleet' }}
@@ -78,7 +78,7 @@
 
     <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-4 shadow-xl shadow-black/40">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-600 to-slate-800 flex items-center justify-center text-white">
+            <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-slate-600 to-slate-800 flex items-center justify-center text-white">
                 🔗
             </div>
             <div>
@@ -97,7 +97,7 @@
                 type="button"
                 id="copy-link-btn"
                 data-link="{{ $gameLink }}"
-                class="px-4 py-3 rounded-2xl bg-gradient-to-r from-sky-500 to-sky-700 text-white font-semibold shadow hover:translate-y-[-2px] transition"
+                class="px-4 py-3 rounded-2xl bg-linear-to-r from-sky-500 to-sky-700 text-white font-semibold shadow hover:translate-y-[-2px] transition"
             >
                 Copy Link
             </button>
@@ -107,7 +107,7 @@
     @if ($hasJoined && ! $game->started && ! $game->ended)
         <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-4 shadow-xl shadow-black/40">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-700 flex items-center justify-center text-white">
+                <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-amber-500 to-orange-700 flex items-center justify-center text-white">
                     🚢
                 </div>
                 <div>
@@ -154,7 +154,7 @@
                     </div>
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-2xl px-4 py-3 shadow hover:translate-y-[-2px] transition"
+                        class="w-full bg-linear-to-r from-amber-500 to-orange-600 text-white font-semibold rounded-2xl px-4 py-3 shadow hover:translate-y-[-2px] transition"
                     >
                         Deploy Ship
                     </button>
@@ -166,7 +166,7 @@
     @if ($hasJoined && $game->started && ! $game->ended)
         <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-4 shadow-xl shadow-black/40">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-600 to-amber-600 flex items-center justify-center text-white">
+                <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-rose-600 to-amber-600 flex items-center justify-center text-white">
                     🎯
                 </div>
                 <div>
@@ -201,7 +201,7 @@
                     </div>
                     <button
                         type="submit"
-                        class="w-full bg-gradient-to-r from-rose-600 to-amber-500 text-white font-semibold rounded-2xl px-4 py-3 shadow hover:translate-y-[-2px] transition disabled:opacity-40 disabled:cursor-not-allowed"
+                        class="w-full bg-linear-to-r from-rose-600 to-amber-500 text-white font-semibold rounded-2xl px-4 py-3 shadow hover:translate-y-[-2px] transition disabled:opacity-40 disabled:cursor-not-allowed"
                         {{ $isTurn ? '' : 'disabled' }}
                     >
                         {{ $isTurn ? 'Fire Torpedoes' : 'Waiting for Commander' }}
@@ -222,7 +222,7 @@
 
     <div class="bg-slate-900/80 border border-slate-700 rounded-3xl p-6 space-y-4 shadow-xl shadow-black/40">
         <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-500 to-slate-700 flex items-center justify-center text-white">
+            <div class="w-12 h-12 rounded-2xl bg-linear-to-br from-slate-500 to-slate-700 flex items-center justify-center text-white">
                 🧭
             </div>
             <div>

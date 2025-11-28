@@ -89,7 +89,7 @@
         </div>
 
         <div class="overflow-x-auto">
-            <div class="inline-grid grid-cols-[repeat(11,_minmax(24px,_1fr))] gap-1 text-center text-xs font-semibold text-slate-400">
+            <div class="inline-grid grid-cols-[repeat(11,minmax(24px,1fr))] gap-1 text-center text-xs font-semibold text-slate-400">
                 <div></div>
                 @foreach($colLabels as $label)
                     <div class="py-1">{{ $label }}</div>
@@ -141,7 +141,7 @@
         </div>
 
         <div class="overflow-x-auto">
-            <div class="inline-grid grid-cols-[repeat(11,_minmax(24px,_1fr))] gap-1 text-center text-xs font-semibold text-slate-400">
+            <div class="inline-grid grid-cols-[repeat(11,minmax(24px,1fr))] gap-1 text-center text-xs font-semibold text-slate-400">
                 <div></div>
                 @foreach($colLabels as $label)
                     <div class="py-1">{{ $label }}</div>
