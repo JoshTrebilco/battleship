@@ -118,7 +118,7 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold text-sky-100">Deploy Fleet</h3>
-                    <p class="text-sm text-slate-400">Place each ship on a 10x10 grid. Coordinates start at 0.</p>
+                    <p class="text-sm text-slate-400">Place each ship on a 10x10 grid.</p>
                 </div>
             </div>
 
