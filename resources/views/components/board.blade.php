@@ -7,6 +7,9 @@
     $cols = range(0, 9);
     $colLabels = range('A', 'J');
 
+    // Cast auth_player_id to integer for consistent type comparisons
+    $auth_player_id = $auth_player_id ? (int) $auth_player_id : null;
+
     $player = null;
     $playerBoard = null;
 
@@ -20,15 +23,24 @@
         }
     }
 
-    $opponent = $game->players()->first(fn ($p) => $p->id !== $auth_player_id);
+    // Use type-safe comparison for opponent lookup to handle type differences
+    // Ensure we find the opponent correctly for both first and second players
+    $opponent = null;
+    if ($auth_player_id) {
+        $opponent = $game->players()->first(function ($p) use ($auth_player_id) {
+            return $p && $p->id && (int) $p->id !== $auth_player_id;
+        });
+    }
     $opponentBoard = $opponent?->board();
 
     $playerShots = $playerBoard?->getShots() ?? [];
     $opponentShots = $opponentBoard?->getShots() ?? [];
     $yourShots = [];
 
+    // Cast both values to integers for consistent comparison
     foreach ($opponentShots as $key => $shot) {
-        if (($shot['shooter_id'] ?? null) == $auth_player_id) {
+        $shooterId = isset($shot['shooter_id']) ? (int) $shot['shooter_id'] : null;
+        if ($shooterId !== null && $shooterId === $auth_player_id) {
             $yourShots[$key] = $shot;
         }
     }
@@ -139,7 +151,7 @@
                 <span class="inline-flex items-center rounded-full bg-slate-800 px-3 py-1 text-xs font-semibold text-slate-200 border border-slate-700">
                     Shots fired: {{ count($yourShots) }}
                 </span>
-                @if($game->ended && $game->winner_id === $auth_player_id)
+                @if($game->ended && $game->winner_id && (int) $game->winner_id === $auth_player_id)
                     <span class="inline-flex items-center rounded-full bg-sky-500/20 px-3 py-1 text-xs font-semibold text-sky-200 border border-sky-500/40">
                         Victory
                     </span>
