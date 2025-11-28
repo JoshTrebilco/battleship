@@ -150,12 +150,12 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <label class="flex flex-col text-sm text-slate-300 space-y-1">
-                            Row (0-9)
-                            <input type="number" name="row" min="0" max="9" class="rounded-2xl bg-slate-800 border border-slate-700 px-4 py-2 text-slate-100 focus:outline-none" required>
+                            Column (A-J)
+                            <input type="text" name="col" class="rounded-2xl bg-slate-800 border border-slate-700 px-4 py-2 text-slate-100 focus:outline-none" required>
                         </label>
                         <label class="flex flex-col text-sm text-slate-300 space-y-1">
-                            Column (0-9)
-                            <input type="number" name="col" min="0" max="9" class="rounded-2xl bg-slate-800 border border-slate-700 px-4 py-2 text-slate-100 focus:outline-none" required>
+                            Row (1-10)
+                            <input type="number" name="row" min="1" max="10" class="rounded-2xl bg-slate-800 border border-slate-700 px-4 py-2 text-slate-100 focus:outline-none" required>
                         </label>
                     </div>
                     <button

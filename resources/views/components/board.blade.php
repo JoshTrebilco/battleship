@@ -6,6 +6,7 @@
     $rows = range(0, 9);
     $cols = range(0, 9);
     $colLabels = range('A', 'J');
+    $rowLabels = range(1, 10);
 
     // Cast auth_player_id to integer for consistent type comparisons
     $auth_player_id = $auth_player_id ? (int) $auth_player_id : null;
@@ -102,7 +103,7 @@
                 @endforeach
 
                 @foreach($rows as $rowIndex => $row)
-                    <div class="flex items-center justify-center text-slate-400">{{ $row }}</div>
+                    <div class="flex items-center justify-center text-slate-400">{{ $rowLabels[$rowIndex] }}</div>
                     @foreach($cols as $colIndex => $col)
                         @php
                             $status = $playerBoard
@@ -170,7 +171,7 @@
                 @endforeach
 
                 @foreach($rows as $rowIndex => $row)
-                    <div class="flex items-center justify-center text-slate-400">{{ $row }}</div>
+                    <div class="flex items-center justify-center text-slate-400">{{ $rowLabels[$rowIndex] }}</div>
                     @foreach($cols as $colIndex => $col)
                         @php
                             $status = $statusForOpponentBoard($yourShots, $row, $col);

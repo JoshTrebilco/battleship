@@ -49,10 +49,13 @@ class PlayerController extends Controller
 
         $validated = $request->validate([
             'ship_type' => ['required', Rule::in(array_map(fn (ShipType $type) => $type->value, ShipType::all()))],
-            'row' => ['required', 'integer', 'min:0', 'max:9'],
-            'col' => ['required', 'integer', 'min:0', 'max:9'],
+            'row' => ['required', 'integer', 'min:1', 'max:10'],
+            'col' => ['required', 'string', 'min:1', 'max:1'],
             'direction' => ['required', Rule::in(['horizontal', 'vertical'])],
         ]);
+
+        $col = ord(strtoupper($validated['col'])) - ord('A');
+        $row = $validated['row'] - 1;
 
         $player = PlayerState::load($player_id);
         $board = $player->board();
@@ -67,8 +70,8 @@ class PlayerController extends Controller
                 player_id: $player_id,
                 board_id: $board->id,
                 ship_type: ShipType::from($validated['ship_type']),
-                row: (int) $validated['row'],
-                col: (int) $validated['col'],
+                row: (int) $row,
+                col: (int) $col,
                 direction: $validated['direction'],
             ));
         } catch (EventNotValidForCurrentState $exception) {
