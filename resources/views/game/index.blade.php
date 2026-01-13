@@ -143,4 +143,7 @@
             </div>
         </div>
     </div>
+    <div class="fixed bottom-2 left-2 text-xs text-sky-400">
+        {{ trim(shell_exec('git rev-parse --short HEAD')) }}
+    </div>
 </x-layout>
